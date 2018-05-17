@@ -374,14 +374,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         } else {
           TOG_STATUS = !TOG_STATUS;
           #ifdef RGBLIGHT_ENABLE
-            //rgblight_mode(16);
+            rgblight_mode(33);
           #endif
         }
         layer_on(_LOWER);
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       } else {
         #ifdef RGBLIGHT_ENABLE
-          //rgblight_mode(RGB_current_mode);   // revert RGB to initial mode prior to RGB mode change
+          rgblight_mode(RGB_current_mode);   // revert RGB to initial mode prior to RGB mode change
         #endif
         TOG_STATUS = false;
         layer_off(_LOWER);
@@ -397,14 +397,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         } else {
           TOG_STATUS = !TOG_STATUS;
           #ifdef RGBLIGHT_ENABLE
-            //rgblight_mode(15);
+            rgblight_mode(32);
           #endif
         }
         layer_on(_RAISE);
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       } else {
         #ifdef RGBLIGHT_ENABLE
-          //rgblight_mode(RGB_current_mode);  // revert RGB to initial mode prior to RGB mode change
+          rgblight_mode(RGB_current_mode);  // revert RGB to initial mode prior to RGB mode change
         #endif
         layer_off(_RAISE);
         TOG_STATUS = false;
@@ -566,20 +566,20 @@ void render_status(struct CharacterMatrix *matrix) {
   // Define layers here, Have not worked out how to have text displayed for each layer. Copy down the number you see and add a case for it below
   char buf[40];
   snprintf(buf,sizeof(buf), "Undef-%ld", layer_state);
-  matrix_write_P(matrix, PSTR("\nLayer: "));
+  matrix_write_P(matrix, PSTR("\n"));
     switch (layer_state) {
         case L_BASE:
-           matrix_write_P(matrix, PSTR("Default"));
+           matrix_write_P(matrix, PSTR("DEFAULT"));
            break;
         case L_RAISE:
-           matrix_write_P(matrix, PSTR("Raise"));
+           matrix_write_P(matrix, PSTR("RAISE"));
            break;
         case L_LOWER:
-           matrix_write_P(matrix, PSTR("Lower"));
+           matrix_write_P(matrix, PSTR("LOWER"));
            break;
         case L_ADJUST:
         case L_ADJUST_TRI:
-           matrix_write_P(matrix, PSTR("Adjust"));
+           matrix_write_P(matrix, PSTR("ADJUST"));
            break;
         default:
            matrix_write(matrix, buf);
