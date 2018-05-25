@@ -35,13 +35,8 @@ LED_BACK_ENABLE = yes        # LED backlight (Enable WS2812 RGB underlight.)
 LED_UNDERGLOW_ENABLE = no   # LED underglow (Enable WS2812 RGB underlight.)
 LED_ANIMATIONS = yes        # LED animations
 
-####  LED_BACK_ENABLE and LED_UNDERGLOW_ENABLE.
-####    Do not enable these with audio at the same time.
-
-# Uncomment these for checking
-#   jp: コンパイル時にカスタマイズの状態を表示したい時はコメントをはずします。
-# $(eval $(call HELIX_CUSTOMISE_MSG))
-# $(info )
+$(eval $(call HELIX_CUSTOMISE_MSG))
+$(info )
 
 ifneq ($(strip $(HELIX_ROWS)), 4)
   ifneq ($(strip $(HELIX_ROWS)), 5)
