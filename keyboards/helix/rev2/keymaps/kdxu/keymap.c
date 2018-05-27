@@ -46,24 +46,17 @@ enum custom_keycodes {
 };
 
 #define ALFRED LALT(KC_SPC)
+#define EISU_KANA LGUI(KC_SPC)
 
-enum macro_keycodes {
-  KC_SAMPLEMACRO,
-};
-
-
-// Fillers to make layering more clear
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
-//Macros
-#define M_SAMPLE M(KC_SAMPLEMACRO)
 
 enum {
-  EISU_KANA = 0
+  TD_ALF = 0
 };
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [EISU_KANA] = ACTION_TAP_DANCE_DOUBLE(KC_LANG2, KC_LANG1)
+  [TD_ALF] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, ALFRED)
 };
 
 
@@ -77,14 +70,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * | Shift|   Z  |   X  |   C  |   V  |   B  |             |   N  |   M  |   ,  |   .  |   /  |Enter |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
-   * |Adjust| Ctrl | Alt  | GUI  | EISU |Lower |Space | BSPC |Raise | KANA | Left | Down |  Up  |Right |
+   * |Adjust| Ctrl | Alt  | GUI  | Shift|Lower |Space | BSPC |Raise | ASKN | Left | Down |  Up  |Right |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_QWERTY] = KEYMAP( \
-      KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ALFRED, \
+      TD(TD_ALF),  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ALFRED, \
       KC_TAB, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
-      ADJUST,  KC_LCTL,  KC_LALT, KC_LGUI, TD(EISU_KANA),  LOWER,  KC_SPC, KC_BSPC,  RAISE,  TD(EISU_KANA), KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
+      ADJUST,  KC_LCTL,  KC_LALT, KC_LGUI, KC_LSFT,  LOWER,  KC_SPC, KC_BSPC,  RAISE,  EISU_KANA, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
       ),
 
 
