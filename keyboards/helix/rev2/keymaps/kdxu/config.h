@@ -32,32 +32,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Select hand configuration */
 
 #define MASTER_LEFT
-// #define MASTER_RIGHT
-// #define EE_HANDS
 
-// Helix keyboard OLED support
-//      see ./rules.mk: OLED_ENABLE=yes or no
 #ifdef OLED_ENABLE
   #define SSD1306OLED
 #endif
 
-/* Select rows configuration */
-// Rows are 4 or 5
-// #define HELIX_ROWS 5 see ./rules.mk
-
-/* key matrix size */
-// Rows are doubled-up
-#if  HELIX_ROWS == 4
-  #define MATRIX_ROWS 8
-  #define MATRIX_COLS 7
-  #define MATRIX_ROW_PINS { D4, C6, D7, E6 }
-#elif HELIX_ROWS == 5
-  #define MATRIX_ROWS 10
-  #define MATRIX_COLS 7
-  #define MATRIX_ROW_PINS { D4, C6, D7, E6, B4 }
-#else
-  #error "expected HELIX_ROWS 4 or 5"
-#endif
+#define MATRIX_ROWS 8
+#define MATRIX_COLS 7
+#define MATRIX_ROW_PINS { D4, C6, D7, E6 }
 
 #define USE_SERIAL_PD2
 
@@ -65,15 +47,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 100
 
-// Helix keyboard RGB LED support
-//#define RGBLIGHT_ANIMATIONS : see ./rules.mk: LED_ANIMATIONS = yes or no
-//    see ./rules.mk: LED_BACK_ENABLE or LED_UNDERGLOW_ENABLE set yes
 #ifdef RGBLED_BACK
-  #if HELIX_ROWS == 4
-    #define RGBLED_NUM 25
-  #elif HELIX_ROWS == 5
-    #define RGBLED_NUM 32
-  #endif
+  #define RGBLED_NUM 25
 #else
   #define RGBLED_NUM 6
 #endif
@@ -81,11 +56,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #if RGBLED_NUM <= 6
   #define RGBLIGHT_LIMIT_VAL 255
 #else
-  #if HELIX_ROWS == 5
-    #define RGBLIGHT_LIMIT_VAL 120
-  #else
-    #define RGBLIGHT_LIMIT_VAL 130
-  #endif
+  #define RGBLIGHT_LIMIT_VAL 130
 #endif
 #define RGBLIGHT_HUE_STEP 10
 #define RGBLIGHT_SAT_STEP 17
@@ -93,15 +64,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifdef RGBLIGHT_ENABLE
-// USB_MAX_POWER_CONSUMPTION value for Helix keyboard
-//  120  RGBoff, OLEDoff
-//  120  OLED
-//  330  RGB 6
-//  300  RGB 32
-//  310  OLED & RGB 32
   #define USB_MAX_POWER_CONSUMPTION 330
-#else
-  // fix iPhone and iPad power adapter issue
-  // iOS device need lessthan 100
-  #define USB_MAX_POWER_CONSUMPTION 100
 #endif
