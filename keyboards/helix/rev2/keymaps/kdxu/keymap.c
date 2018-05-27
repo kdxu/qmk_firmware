@@ -137,15 +137,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-#ifdef AUDIO_ENABLE
-
-float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-float tone_dvorak[][2]     = SONG(DVORAK_SOUND);
-float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
-float tone_plover[][2]     = SONG(PLOVER_SOUND);
-float tone_plover_gb[][2]  = SONG(PLOVER_GOODBYE_SOUND);
-float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
-#endif
 
 // define variables for reactive RGB
 bool TOG_STATUS = false;
@@ -330,13 +321,6 @@ static void render_logo(struct CharacterMatrix *matrix) {
 
 
 void render_status(struct CharacterMatrix *matrix) {
-
-  // Render to mode icon
-  static char logo[][2][3]={{{0x95,0x96,0},{0xb5,0xb6,0}},{{0x97,0x98,0},{0xb7,0xb8,0}}};
-  matrix_write_P(matrix, PSTR("\n"));
-  matrix_write(matrix, logo[0][1]);
-
-  // Define layers here, Have not worked out how to have text displayed for each layer. Copy down the number you see and add a case for it below
   char buf[40];
   snprintf(buf,sizeof(buf), "Undef-%ld", layer_state);
   matrix_write_P(matrix, PSTR("\n"));
