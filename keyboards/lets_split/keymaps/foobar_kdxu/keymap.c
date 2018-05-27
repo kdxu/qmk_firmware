@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QGMLWY] = LAYOUT( \
 		KC_Q,    KC_G,    KC_M,    KC_L,  KC_W,  XXXXX, XXXXX, KC_Y,  KC_F,  KC_U,  KC_B,  KC_DEL,    \
 		KC_D,     KC_S,    KC_T,    KC_N,  KC_R,  XXXXX, XXXXX, KC_I,  KC_A,  KC_E,  KC_O,  KC_M,    \
-		KC_Z ,    KC_X,   KC_C,    KC_V,  KC_J,    XXXXX, XXXXX, KC_K, KC_P,  KC_COMM,  KC_DOT,  XXXXX,    \
+		KC_Z ,    KC_X,   KC_C,    KC_V,  KC_J,    XXXXX, XXXXX, KC_K, KC_P,  KC_COMM,  KC_DOT,  KC_SLSH,    \
 		XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX   \
   ),
     /* LOWER (Symbol)
