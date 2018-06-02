@@ -29,6 +29,7 @@ enum custom_keycodes {
 #define CP LGUI(KC_C)
 #define PST LGUI(KC_V)
 #define RLD LGUI(KC_R)
+#define QUIT LGUI(KC_Q)
 
 enum {
   TD_ALF = 0,
@@ -80,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |  Ctrl|   `  |      |  Alt | GUI  |           |      |      |      |   \  |   '  |
  * `----------------------------------'           `----------------------------------'
  *                  ,--------------------.    ,------,-------------.
- *                  |      | LOWER|      |    |      | RAISE|      |
+ *                  |      | LOWER|      |    |      | RAISE| Shift|
 *                   `-------------|  E/K |    |      |------+------.
  *                                |      |    |      |
  *                                `------'    `------'
@@ -89,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    \
   KC_TAB,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,      KC_MINS, KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC, \
   KC_LCTL, KC_GRV,  _______, KC_LALT, KC_LGUI,      _______, _______, _______, KC_BSLS,  KC_QUOT, \
-                    _______, _______, EISU_KANA,     _______, _______, _______                    \
+                    _______, _______, EISU_KANA,     _______, _______, KC_LSFT                   \
 ),
 
 /* Lower
@@ -97,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------.           ,----------------------------------.
  * |   !  |   @  |   #  |   $  |   %  |           |   ^  |   &  |   *  |   (  |   )  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |  Esc |      |Reload|      |      |           |   -  |   _  |   +  |   {  |   }  |
+ * |  Esc | Quit |Reload|      |      |           |   -  |   _  |   +  |   {  |   }  |
  * |------+------+------+------+------|           |------+------+------+------+------|
  * |      |   ~  | Copy | Paste|  GUI |           |      |      |      |   |  |   "  |
  * `----------------------------------'           `----------------------------------'
@@ -109,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT( \
   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, TD(TD_LPLN), TD(TD_RPLN), \
-  TD(TD_ALF), _______, RLD, _______, _______,      KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  TD(TD_ALF), QUIT, RLD, _______, _______,      KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
   _______, KC_TILD, CP, PST, KC_LGUI, _______, _______, _______, KC_PIPE,  KC_DQT, \
                     _______, _______, _______,    KC_ENT,  _______, KC_LSFT                    \
 ),
