@@ -96,20 +96,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------.           ,----------------------------------.
  * |   !  |   @  |   #  |   $  |   %  |           |   ^  |   &  |   *  |   (  |   )  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |  Esc |      |Close |Reload| Find |           |   -  |   _  |   +  |   {  |   }  |
+ * |  Esc |      | Save |Reload| Find |           |   -  |   _  |   +  |   {  |   }  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |      |   ~  | Copy | Paste|      |           |      |      |      |   |  |   "  |
+ * |      |   ~  | Copy | Paste|  Sel |           |  CLS |      |      |   |  |   "  |
  * `----------------------------------'           `----------------------------------'
  *                  ,--------------------.    ,------,-------------.
- *                  |      | LOWER|      |    |      | RAISE| Shift |
+ *                  | Quit | LOWER|      |    |      | RAISE| Shift |
  *                  `-------------|      |    | Enter|------+------.
  *                                |      |    |      |
  *                                `------'    `------'
  */
 [_LOWER] = LAYOUT( \
   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, TD(TD_LPLN), TD(TD_RPLN), \
-  TD(TD_ALF), _______, CLS, RLD, LGUI(KC_F),      KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
-  _______, KC_TILD, CP, PST, KC_LGUI, _______, _______, _______, KC_PIPE,  KC_DQT, \
+  TD(TD_ALF), _______, LGUI(KC_S), RLD, LGUI(KC_F),      KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  _______, KC_TILD, CP, PST, LGUI(KC_A), CLS, _______, _______, KC_PIPE,  KC_DQT, \
                     QUIT, _______, _______,    KC_ENT,  _______, KC_LSFT                    \
 ),
 
