@@ -23,8 +23,25 @@ enum custom_keycodes {
 // Fillers to make layering more clear
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
+#define ALFRED LALT(KC_SPC)
+#define EISU_KANA LGUI(KC_SPC)
+#define NP_TAB LGUI(KC_TAB)
+#define CP LGUI(KC_C)
+#define PST LGUI(KC_V)
 
-// Defines for task manager and such
+enum {
+  TD_ALF = 0,
+  TD_LPLN = 1,
+  TD_RPLN = 2
+};
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_ALF] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, ALFRED),
+  [TD_LPLN] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_LBRC),
+  [TD_RPLN] = ACTION_TAP_DANCE_DOUBLE(KC_RPRN, KC_RBRC)
+};
+
+// Defines for task manager and suc
 #define CALTDEL LCTL(LALT(KC_DEL))
 #define TSKMGR LCTL(LSFT(KC_ESC))
 
@@ -59,11 +76,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------|           |------+------+------+------+------|
  * |  Tab | Left | Down |  Up  | Right|           |   -  |   _  |   =  |   [  |   ]  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |  Ctrl|   `  |  GUI |  Alt |      |           |      |      |      |   \  |   '  |
+ * |  Ctrl|   `  |  GUI |  Alt |  MT  |           |      |      |      |   \  |   '  |
  * `----------------------------------'           `----------------------------------'
  *                  ,--------------------.    ,------,-------------.
  *                  |      | LOWER|      |    |      | RAISE|      |
- *                  `-------------|      |    |      |------+------.
+*                   `-------------|  E/K |    |      |------+------.
  *                                |      |    |      |
  *                                `------'    `------'
  */
@@ -71,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    \
   KC_TAB,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,      KC_MINS, KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC, \
   KC_LCTL, KC_GRV,  KC_LGUI, KC_LALT, _______,      _______, _______, _______, KC_BSLS,  KC_QUOT, \
-                    _______, _______, _______,      _______, _______, _______                    \
+                    _______, _______, EISU_KANA,      _______, _______, _______                    \
 ),
 
 /* Lower
@@ -79,20 +96,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,----------------------------------.           ,----------------------------------.
  * |   !  |   @  |   #  |   $  |   %  |           |   ^  |   &  |   *  |   (  |   )  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |  Esc |      |      |      |      |           |   -  |   _  |   +  |   {  |   }  |
+ * |  Esc |  MT  |      |      |      |           |   -  |   _  |   +  |   {  |   }  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |  Caps|   ~  |      |      |      |           |      |      |      |   |  |   "  |
+ * |  Caps|   ~  | Copy | Paste|      |           |      |      |      |   |  |   "  |
  * `----------------------------------'           `----------------------------------'
  *                  ,--------------------.    ,------,-------------.
-*                  |      | LOWER|      |    |      | RAISE|  Shift |
+ *                  |      | LOWER|      |    |      | RAISE| Shift |
  *                  `-------------|      |    | Enter|------+------.
- *                               |      |    |      |
+ *                                |      |    |      |
  *                                `------'    `------'
  */
 [_LOWER] = LAYOUT( \
-  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, \
-  KC_ESC,  _______, _______, _______, _______,      KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
-  KC_CAPS, KC_TILD, _______, _______, _______,      _______, _______, _______, KC_PIPE,  KC_DQT, \
+  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, TD(TD_LPLN), TD(TD_RPLN), \
+  TD(TD_ALF), NP_TAB, _______, _______, _______,      KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  KC_CAPS, KC_TILD, CP, PST, _______,      _______, _______, _______, KC_PIPE,  KC_DQT, \
                     _______, _______, _______,      KC_ENT,  _______, KC_LSFT                    \
 ),
 

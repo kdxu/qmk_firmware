@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLED_NUM 8
 #define RGBLIGHT_TIMER
 #define RGBLIGHT_ANIMATIONS
+#define RGBLIGHT_LIMIT_VAL 100
 #define RGBLIGHT_HUE_STEP 10
 #define RGBLIGHT_SAT_STEP 10
 #define RGBLIGHT_VAL_STEP 10
