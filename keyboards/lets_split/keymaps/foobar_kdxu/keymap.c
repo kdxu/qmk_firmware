@@ -6,96 +6,107 @@
 
 extern keymap_config_t keymap_config;
 
-#define _QGMLWY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _ADJUST 16
+#define QWERTY 0
+#define LOWER 1
+#define RAISE 2
 
-enum custom_keycodes {
-  QGMLWY = SAFE_RANGE,
-  LOWER,
-  RAISE,
-  ADJUST
+enum {
+  TD_ALF = 0,
+  TD_LPLN = 1,
+  TD_RPLN = 2,
+  TD_SAKN = 3,
+  CT_CLN = 4
 };
 
 #define _____ KC_TRNS
 #define XXXXX KC_NO
 
+#define RN LT(LOWER, KC_N)
+#define LB LT(RAISE, KC_B)
+#define ALF LALT(KC_SPC)
+#define EK  LGUI(KC_SPC)
+#define TRPN TD(TD_RPLN)
+#define TLPN TD(TD_LPLN)
+#define CLN  TD(CT_CLN)
+#define TALF TD(TD_ALF)
+
+void dance_cln_finished (qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    register_code (KC_RSFT);
+    register_code (KC_SCLN);
+  } else {
+    register_code (KC_SCLN);
+  }
+}
+
+void dance_cln_reset (qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    unregister_code (KC_RSFT);
+    unregister_code (KC_SCLN);
+  } else {
+    unregister_code (KC_SCLN);
+  }
+}
+
+
 qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_ALF] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, ALF),
+  [TD_LPLN] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_LBRC),
+  [TD_RPLN] = ACTION_TAP_DANCE_DOUBLE(KC_RPRN, KC_RBRC),
+  [CT_CLN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_cln_finished, dance_cln_reset)
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  /* QGMLWY
-   * ,-----------------------------------------, ,-----------------------------------------,
-   * |  Q   |  G   |  M   |  L   |  W   |      | |      |  Y   |  F   |  U   |  B   | DEL  |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |  D   |  S   |  T   |  N   |  R   |      | |      |  I   |  A   |  E   |  O   |  H   |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |  Z   |  X   |  C   |  V   |  J   |      | |      |  K   |  P   |  ,   |  .   |  /   |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |      |      |      |      |      |      | |      |      |      |      |      |      |
-   * `-----------------------------------------' `-----------------------------------------'
+  /* Qwerty
+   * ,-----------------------------------.       ,----------------------------------
+   * |  Q   |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |  P   |
+   * |------+------+------+------+------|        |------+------+------+------+------+
+   * |   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  | BKSP |
+   * |------+------+------+------+------+        |------+------+------+------+------+
+   * |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   |
+   * |------+------+------+------+------+-       +------+------+------+------+------+
    */
-[_QGMLWY] = LAYOUT( \
-		KC_Q,    KC_G,    KC_M,    KC_L,  KC_W,  XXXXX, XXXXX, KC_Y,  KC_F,  KC_U,  KC_B,  KC_DEL,    \
-		KC_D,     KC_S,    KC_T,    KC_N,  KC_R,  XXXXX, XXXXX, KC_I,  KC_A,  KC_E,  KC_O,  KC_M,    \
-		KC_Z ,    KC_X,   KC_C,    KC_V,  KC_J,    XXXXX, XXXXX, KC_K, KC_P,  KC_COMM,  KC_DOT,  KC_SLSH,    \
-		XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX   \
+[QWERTY] = LAYOUT( \
+  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,  XXXXX, XXXXX,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    \
+  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,  XXXXX, XXXXX,  KC_H,    KC_J,    KC_K,    KC_L,    KC_BSPC, \
+  KC_Z,    KC_X,    KC_C,    KC_V,    LB,    XXXXX, XXXXX,  RN,      KC_M,    KC_COMM, KC_DOT,  KC_SLSH, \
+  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX, XXXXX,  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX   \
   ),
-    /* LOWER (Symbol)
-   * ,-----------------------------------------, ,-----------------------------------------,
-   * |  !   |   "  |   #  |   $  |   %  |      | |      |   &  |  '   |  `   |   |  | yen  |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * | ESC  |   [  |  (   |   {  |  \   |      | |      |   ~  |  =   |  :   |   /  |  *   |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |  ^   |   ]  |  )   |   }  |  SPC |      | |      |      |  -   |  ;   |   .  |  +   |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |      |      |      |      |      |      | |      |      |      |      |      |      |
-   * `-----------------------------------------' `-----------------------------------------'
+
+   /* LOWER
+     ,----------------------------------.        ,----------------------------------.
+   * |   !  |   @  |   #  |   $  |   %  |        |   ^  |   &  |   *  |   (  |   )  |
+   * |------+------+------+------+------|        |------+------+------+------+------|
+   * |  Esc |      |   '  |   `  |   =  |        |   -  |   _  |   +  |   {  |  }   |
+   * |------+------+------+------+------|        |------+------+------+------+------|
+   * |   ~  |      |      |      | SPC  |        |      |   ;  |   /  |   |  |   "  |
+   * `----------------------------------'        `----------------------------------'
    */
 
-[_LOWER] = LAYOUT( \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, DF(QGMLWY) \
-		),
+[LOWER] = LAYOUT( \
+  KC_EXLM,    KC_AT,   KC_HASH, KC_DLR,  KC_PERC, XXXXX, XXXXX,  KC_CIRC, KC_AMPR, KC_ASTR, TLPN,    TRPN,\
+  TALF,       XXXXX,   KC_QUOT, KC_GRV,   KC_EQL,   XXXXX, XXXXX,  KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  KC_TILD,    XXXXX,   XXXXX,   XXXXX,   KC_SPC,   XXXXX, XXXXX, _____,  CLN, KC_SLSH, KC_PIPE,  KC_DQT, \
+  XXXXX,      XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX,  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX   \
+  ),
+
+
 
   /* RAISE
-   * ,-----------------------------------------, ,-----------------------------------------.
-   * |  1   |  2   |   3  |  4   |  5   |      | |      |   6  |   7  |   8  |   9  |   0  |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * | TAB  |  F1  |  F2  |  F3  |  F4  |      | |      |  F5  |  SPC |  F7  |  F8  |   @  |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |  _   |  F9  |  F10 |  F11 |      |      | |      |  ENT | BSPC |      |  F12 |   -  |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |      |      |      |      |      |      | |      |      |      |      |      |      |
-   * `-----------------------------------------' `-----------------------------------------'
+   * ,----------------------------------,        ,----------------------------------.
+   * |  1   |  2   |   3  |  4   |  5   |        |   6  |   7  |   8  |   9  |   0  |
+   * |------+------+------+------+------|        |------+------+------+------+------|
+   * |  TAB |      |      |      |      |        |  EK  |      |      |      |      |
+   * |------+------+------+------+------|        |------+------+------+------+------|
+   * |      |      |      |      |      |        |  ENT |      |      |      |      |
+   * `----------------------------------'        `----------------------------------'
    */
 
-[_RAISE] = LAYOUT( \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, DF(QGMLWY) \
-  ),
-    /* ADJUST
-   * ,-----------------------------------------, ,-----------------------------------------,
-   * |      |      |      |      |      |      | |      |      |      |      |      |      |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |      |      |      |      |      |      | |      |      |      |      |      |      |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |      |      |      |      |      |      | |      |      |      |      |      |      |
-   * |------+------+------+------+------+------| |------+------+------+------+------+------|
-   * |      |      |      |      |      |      | |      |      |      |      |      |      |
-   * `-----------------------------------------' `-----------------------------------------'
-   */
-
-[_ADJUST] = LAYOUT( \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, DF(QGMLWY) \
+[RAISE] = LAYOUT( \
+    KC_1,    KC_2,  KC_3,  KC_4,  KC_5,  XXXXX, XXXXX, KC_6,   KC_7, KC_8,  KC_9, KC_0,
+    KC_TAB,  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, EK, XXXXX, XXXXX, XXXXX, KC_AT,     \
+    XXXXX,   XXXXX, XXXXX, XXXXX, _____, XXXXX, XXXXX, KC_ENT, XXXXX, XXXXX, XXXXX, XXXXX,     \
+    XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, DF(QWERTY) \
   ),
 };
 
@@ -114,51 +125,19 @@ void matrix_scan_user(void) {
   RXLED0;
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case QGMLWY:
-      if (record->event.pressed) {
-        persistent_default_layer_set(1UL<<_QGMLWY);
-      }
-      return false;
-      break;
-    case LOWER:
-      if (record->event.pressed) {
-        layer_on(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case RAISE:
-      if (record->event.pressed) {
-        layer_on(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-  }
-  return true;
-}
-
 #ifdef RGBLIGHT_ENABLE
 
 uint32_t layer_state_set_user(uint32_t state) {
   uint8_t layer = biton32(state);
   switch (layer) {
-    case _QGMLWY:
-      rgblight_mode(16);
+    case QWERTY:
+      rgblight_mode(9);
       break;
-    case _RAISE:
+    case RAISE:
       rgblight_mode(6);
       break;
-    case _LOWER:
-      rgblight_mode(7);
+    case LOWER:
+      rgblight_mode(8);
       break;
     default:
       break;
