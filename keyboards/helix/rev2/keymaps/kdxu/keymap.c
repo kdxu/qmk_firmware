@@ -25,11 +25,13 @@ extern uint8_t is_master;
 
 #define _QWERTY 0
 #define _LOWER 1
+#define _RAISE 2
 #define _ADJUST 16
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
+  RAISE,
   ADJUST,
   BACKLIT,
   RGBRST
@@ -41,16 +43,39 @@ enum custom_keycodes {
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 
+
+void dance_cln_finished (qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    register_code (KC_RSFT);
+    register_code (KC_SCLN);
+  } else {
+    register_code (KC_SCLN);
+  }
+}
+
+void dance_cln_reset (qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    unregister_code (KC_RSFT);
+    unregister_code (KC_SCLN);
+  } else {
+    unregister_code (KC_SCLN);
+  }
+}
+
 enum {
   TD_ALF = 0,
   TD_LPLN = 1,
-  TD_RPLN = 2
+  TD_RPLN = 2,
+  TD_SAKN = 3,
+  CT_CLN = 4
 };
 
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_ALF] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, ALFRED),
   [TD_LPLN] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_LBRC),
-  [TD_RPLN] = ACTION_TAP_DANCE_DOUBLE(KC_RPRN, KC_RBRC)
+  [TD_RPLN] = ACTION_TAP_DANCE_DOUBLE(KC_RPRN, KC_RBRC),
+  [TD_SAKN] = ACTION_TAP_DANCE_DOUBLE(KC_SPC, EISU_KANA),
+  [CT_CLN] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_cln_finished, dance_cln_reset)
 };
 
 
@@ -58,39 +83,58 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Qwerty
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * | Esc  |   Q  |   W  |   E  |   R  |   T  |             |   Y  |   U  |   I  |   O  |   P  |  `   |
+   * |      |   Q  |   W  |   E  |   R  |   T  |             |   Y  |   U  |   I  |   O  |   P  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * | Tab  |   A  |   S  |   D  |   F  |   G  |             |   H  |   J  |   K  |   L  |   ;  |  '   |
+   * |      |   A  |   S  |   D  |   F  |   G  |             |   H  |   J  |   K  |   L  |  Alt |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * | Shift|   Z  |   X  |   C  |   V  |   B  |             |   N  |   M  |   ,  |   .  |   /  |Enter |
+   * |      |   Z  |   X  |   C  |   V  |   B  |             |   N  |   M  |   ,  |   .  |  GUI |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
-   * |Adjust| Ctrl | Alt  | GUI  | Shift| Lower| Space| Bksp | Lower|E/Kana| Left | Down |  Up  |Right |
+   * |Adjust|      |      |      | Ctrl | Lower| Space| Bksp | Raise| Shift|      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_QWERTY] = KEYMAP( \
-      TD(TD_ALF),  KC_Q,    KC_W,    KC_E,    KC_R,   KC_T,                 KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_GRV, \
-      KC_TAB, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
-      ADJUST,  KC_LCTL,  KC_LALT, KC_LGUI, KC_LSFT, LOWER,  KC_SPC, KC_BSPC, LOWER, EISU_KANA,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
+      _______,  KC_Q,    KC_W,    KC_E,    KC_R,   KC_T,                 KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, _______, \
+      _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                 KC_H,    KC_J,    KC_K,    KC_L,    KC_LALT, _______, \
+      _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                 KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_LGUI, _______, \
+      ADJUST,  _______,  _______, _______, KC_LCTL, LOWER, KC_SPC, KC_BSPC, RAISE, KC_LSFT,  _______, _______, _______,  _______  \
+      ),
+
+
+  /* Raise
+   * ,-----------------------------------------.             ,-----------------------------------------.
+   * |      |   1  |   2  |   3  |   4  |   5  |             |   6  |   7  |   8  |   9  |   0  |      |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * |      |  Tab | Left | Down |  Up  | Right|             |   -  |   _  |   =  |   [  |   ]  |      |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * |      |  Ctrl|   `  |      |  Alt | GUI  |             |      |      |      |   \  |   '  |      |
+   * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
+   * |      |      |      |      |      |      |      |      |      | Shift|      |      |      |      |
+   * `-------------------------------------------------------------------------------------------------'
+   */
+  [_RAISE] = KEYMAP( \
+      _______,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
+      _______,  KC_TAB,  KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,                  KC_MINS, KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC, _______, \
+      _______,  KC_LCTL, KC_GRV,  _______, KC_LALT, KC_LGUI,                 _______, _______, _______, KC_BSLS,  KC_QUOT, _______,\
+      _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_LSFT, _______, _______, _______, _______ \
       ),
 
 
   /* Lower
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * |   ~  |   !  |   @  |   #  |   $  |   %  |             |   ^  |   &  |   *  |   |  |   (  |   )  |
+   * |      |   !  |   @  |   #  |   $  |   %  |             |   ^  |   &  |   *  |   (  |   )  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |      |      |      |      |      |             |   -  |   _  |   +  |   =  |   {  |  }   |
+   * |      |  Esc |      |      |      |      |             |   -  |   _  |   +  |   {  |  }   |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   1  |   2  |   3  |   4  |   5  |             |   6  |   7  |   8  |   9  |   0  |      |
+   * |      |   ~  |      |      |      |      |             |      |   ;  |   /  |   |  |   "  |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
-   * |      |      |      |      |      |      | Space| Bksp |      |      |      |      |      |      |
+   * |      |      |      |      |      |      |      | Enter|      |      |      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_LOWER] = KEYMAP( \
-      KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                 KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, TD(TD_LPLN), TD(TD_RPLN), \
-      _______, _______, _______, _______, _______, _______,                 KC_MINS, KC_UNDS, KC_PLUS, KC_EQL, KC_LCBR, KC_RCBR, \
-      _______,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
-      _______, _______, _______, _______, _______, _______, KC_SPC, KC_BSPC, _______, _______, _______, _______, _______, _______ \
+      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                KC_CIRC, KC_AMPR, KC_ASTR, TD(TD_LPLN), TD(TD_RPLN), _______,\
+      _______, TD(TD_ALF), _______, _______, _______, _______,             KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, _______, \
+      _______, KC_TILD, _______, _______, _______, _______,                _______, TD(CT_CLN), KC_SLSH, KC_PIPE,  KC_DQT, _______, \
+      _______, _______, _______, _______, _______, _______, _______, KC_ENT, _______, _______, _______, _______, _______, _______ \
       ),
 
   /* Adjust
@@ -131,11 +175,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case RAISE:
+      if (record->event.pressed) {
+        layer_on(_RAISE);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+      } else {
+        layer_off(_RAISE);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+      }
+      return false;
+      break;
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
       } else {
         layer_off(_LOWER);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
       }
       return false;
       break;
@@ -204,6 +260,7 @@ void matrix_update(struct CharacterMatrix *dest,
 //assign the right code to your layers for OLED display
 #define L_BASE 0
 #define L_LOWER 2
+#define L_RAISE 4
 #define L_FNLAYER 64
 #define L_NUMLAY 128
 #define L_NLOWER 136
@@ -235,6 +292,9 @@ void render_status(struct CharacterMatrix *matrix) {
     case L_LOWER:
       matrix_write_P(matrix, PSTR("LOWER"));
       break;
+		case L_RAISE:
+			matrix_write_P(matrix, PSTR("RAISE"));
+			break;
     case L_ADJUST:
     case L_ADJUST_TRI:
       matrix_write_P(matrix, PSTR("ADJUST"));
