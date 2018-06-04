@@ -21,8 +21,8 @@ enum {
 #define _____ KC_TRNS
 #define XXXXX KC_NO
 
-#define RN LT(LOWER, KC_N)
-#define LB LT(RAISE, KC_B)
+#define RN LT(RAISE, KC_N)
+#define LB LT(LOWER, KC_B)
 #define ALF LALT(KC_SPC)
 #define EK  LGUI(KC_SPC)
 #define TRPN TD(TD_RPLN)
@@ -79,15 +79,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------|        |------+------+------+------+------|
    * |  Esc |      |   '  |   `  |   =  |        |   -  |   _  |   +  |   {  |  }   |
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |   ~  |      |      |      | SPC  |        |      |   ;  |   /  |   |  |   "  |
+   * |   ~  |      |      |      |      |        |  SPC |   ;  |   /  |   |  |   "  |
    * `----------------------------------'        `----------------------------------'
    */
 
 [LOWER] = LAYOUT( \
   KC_EXLM,    KC_AT,   KC_HASH, KC_DLR,  KC_PERC, XXXXX, XXXXX,  KC_CIRC, KC_AMPR, KC_ASTR, TLPN,    TRPN,\
-  TALF,       XXXXX,   KC_QUOT, KC_GRV,   KC_EQL,   XXXXX, XXXXX,  KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
-  KC_TILD,    XXXXX,   XXXXX,   XXXXX,   KC_SPC,   XXXXX, XXXXX, _____,  CLN, KC_SLSH, KC_PIPE,  KC_DQT, \
-  XXXXX,      XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX,  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX   \
+  TALF,       XXXXX,   KC_QUOT, KC_GRV,  KC_EQL,  XXXXX, XXXXX,  KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  KC_TILD,    XXXXX,   XXXXX,   XXXXX,   _____,   XXXXX, XXXXX,  KC_SPC,  CLN, KC_SLSH, KC_PIPE,  KC_DQT, \
+  XXXXX,      XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX,  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX  \
   ),
 
 
@@ -98,15 +98,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------|        |------+------+------+------+------|
    * |  TAB |      |      |      |      |        |  EK  |      |      |      |      |
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |      |      |      |      |      |        |  ENT |      |      |      |      |
+   * |      |      |      |      | ENT  |        |      |      |      |      |      |
    * `----------------------------------'        `----------------------------------'
    */
 
 [RAISE] = LAYOUT( \
-    KC_1,    KC_2,  KC_3,  KC_4,  KC_5,  XXXXX, XXXXX, KC_6,   KC_7, KC_8,  KC_9, KC_0,
-    KC_TAB,  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, EK, XXXXX, XXXXX, XXXXX, KC_AT,     \
-    XXXXX,   XXXXX, XXXXX, XXXXX, _____, XXXXX, XXXXX, KC_ENT, XXXXX, XXXXX, XXXXX, XXXXX,     \
-    XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, DF(QWERTY) \
+    KC_1,    KC_2,  KC_3,  KC_4,  KC_5,   XXXXX, XXXXX, KC_6,  KC_7, KC_8,  KC_9, KC_0, \
+    KC_TAB,  XXXXX, XXXXX, XXXXX, XXXXX,  XXXXX, XXXXX, EK,    XXXXX, XXXXX, XXXXX, KC_AT, \
+    XXXXX,   XXXXX, XXXXX, XXXXX, KC_ENT, XXXXX, XXXXX, _____, XXXXX, XXXXX, XXXXX, XXXXX, \
+    XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX,  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \
   ),
 };
 
@@ -131,13 +131,13 @@ uint32_t layer_state_set_user(uint32_t state) {
   uint8_t layer = biton32(state);
   switch (layer) {
     case QWERTY:
-      rgblight_mode(9);
+      rgblight_mode(25);
       break;
     case RAISE:
       rgblight_mode(6);
       break;
     case LOWER:
-      rgblight_mode(8);
+      rgblight_mode(7);
       break;
     default:
       break;
