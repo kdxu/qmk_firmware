@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |  Tab | Left | Down |  Up  | Right|             |   -  |   _  |   =  |   [  |   ]  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |  Ctrl|   `  |      |  Alt |      |             | GUI  |      |      |   \  |   '  |      |
+   * |      |   `  |      |      |  Alt |      |             | GUI  |      |      |   \  |   '  |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
    * |      |      |      |      |      |      |      |      |      | Shift|      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
@@ -114,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_RAISE] = KEYMAP( \
       _______,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
       _______,  KC_TAB,  KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,                  KC_MINS, KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC, _______, \
-      _______,  KC_LCTL, KC_GRV,  _______, KC_LALT, _______,                KC_LGUI, _______, _______, KC_BSLS,  KC_QUOT, _______,\
+      _______,  KC_GRV, _______,  _______, KC_LALT, _______,                KC_LGUI, _______, _______, KC_BSLS,  KC_QUOT, _______,\
       _______, _______, _______, _______, _______, _______, EISU_KANA, _______, _______, KC_LSFT, _______, _______, _______, _______ \
       ),
 
@@ -267,7 +267,7 @@ void matrix_update(struct CharacterMatrix *dest,
 #define L_NFNLAYER 192
 #define L_MOUSECURSOR 256
 #define L_ADJUST 65536
-#define L_ADJUST_TRI 65560
+#define L_ADJUST_TRI 65542
 
 static void render_logo(struct CharacterMatrix *matrix) {
 
@@ -292,9 +292,9 @@ void render_status(struct CharacterMatrix *matrix) {
     case L_LOWER:
       matrix_write_P(matrix, PSTR("LOWER"));
       break;
-		case L_RAISE:
-			matrix_write_P(matrix, PSTR("RAISE"));
-			break;
+    case L_RAISE:
+      matrix_write_P(matrix, PSTR("RAISE"));
+      break;
     case L_ADJUST:
     case L_ADJUST_TRI:
       matrix_write_P(matrix, PSTR("ADJUST"));
