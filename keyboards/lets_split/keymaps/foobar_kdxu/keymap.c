@@ -9,6 +9,7 @@ extern keymap_config_t keymap_config;
 #define QWERTY 0
 #define LOWER 1
 #define RAISE 2
+#define MISC 3
 
 enum {
   TD_ALF = 0,
@@ -23,6 +24,7 @@ enum {
 
 #define RN LT(RAISE, KC_N)
 #define LB LT(LOWER, KC_B)
+#define M_T LT(MISC, KC_T)
 #define ALF LALT(KC_SPC)
 #define EK  LGUI(KC_SPC)
 #define TRPN TD(TD_RPLN)
@@ -59,7 +61,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Qwerty
    * ,-----------------------------------.       ,----------------------------------
-   * |  Q   |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |  P   |
+   * |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |  P   |
    * |------+------+------+------+------|        |------+------+------+------+------+
    * |   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  | BKSP |
    * |------+------+------+------+------+        |------+------+------+------+------+
@@ -67,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+-       +------+------+------+------+------+
    */
 [QWERTY] = LAYOUT( \
-  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,  XXXXX, XXXXX,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    \
+  KC_Q,    KC_W,    KC_E,    KC_R,    M_T,  XXXXX, XXXXX,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    \
   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,  XXXXX, XXXXX,  KC_H,    KC_J,    KC_K,    KC_L,    KC_BSPC, \
   KC_Z,    KC_X,    KC_C,    KC_V,    LB,    XXXXX, XXXXX,  RN,      KC_M,    KC_COMM, KC_DOT,  KC_SLSH, \
   XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX, XXXXX,  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX   \
@@ -77,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      ,----------------------------------.        ,----------------------------------.
    * |   !  |   @  |   #  |   $  |   %  |        |   ^  |   &  |   *  |   (  |   )  |
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |  Esc |      |   '  |   `  |   =  |        |   -  |   _  |   +  |   {  |  }   |
+   * |  Esc | SHIFT|   '  |   `  |   =  |        |   -  |   _  |   +  |   {  |  }   |
    * |------+------+------+------+------|        |------+------+------+------+------|
    * |   ~  |      |      |      |      |        |  SPC |   ;  |   /  |   |  |   "  |
    * `----------------------------------'        `----------------------------------'
@@ -91,12 +93,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 
-
   /* RAISE
    * ,----------------------------------,        ,----------------------------------.
    * |  1   |  2   |   3  |  4   |  5   |        |   6  |   7  |   8  |   9  |   0  |
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |  TAB |      |      |      |      |        |  EK  |      |      |      |      |
+   * |  TAB | LEFT | DOWN |  UP  |RIGHT |        |  EK  |      |      |      |      |
    * |------+------+------+------+------|        |------+------+------+------+------|
    * |      |      |      |      | ENT  |        |      |      |      |      |      |
    * `----------------------------------'        `----------------------------------'
@@ -104,9 +105,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [RAISE] = LAYOUT( \
     KC_1,    KC_2,  KC_3,  KC_4,  KC_5,   XXXXX, XXXXX, KC_6,  KC_7, KC_8,  KC_9, KC_0, \
-    KC_TAB,  XXXXX, XXXXX, XXXXX, XXXXX,  XXXXX, XXXXX, EK,    XXXXX, XXXXX, XXXXX, KC_AT, \
+    KC_TAB, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT,  XXXXX, XXXXX, EK,    XXXXX, XXXXX, XXXXX, KC_AT, \
     XXXXX,   XXXXX, XXXXX, XXXXX, KC_ENT, XXXXX, XXXXX, _____, XXXXX, XXXXX, XXXXX, XXXXX, \
     XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX,  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \
+  ),
+
+  /* MISC
+   * ,----------------------------------,        ,----------------------------------.
+   * |  Mod |      |      |      |      |        |      |      |      |      |RESET |
+   * |------+------+------+------+------|        |------+------+------+------+------|
+   * |  hui | hud  |      |      |      |        |      |      |      |      |      |
+   * |------+------+------+------+------|        |------+------+------+------+------|
+   * |  sai | sad  |      |      |      |        |      |      |      |      |      |
+   * `----------------------------------'        `----------------------------------'
+   */
+
+[MISC] = LAYOUT( \
+    RGB_MOD, XXXXX, XXXXX, XXXXX, _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, RESET,     \
+    RGB_HUI, RGB_HUD, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
+    RGB_SAI, RGB_SAD, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,     \
+    XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, DF(QWERTY) \
   ),
 };
 
@@ -138,6 +156,9 @@ uint32_t layer_state_set_user(uint32_t state) {
       break;
     case LOWER:
       rgblight_mode(7);
+      break;
+    case MISC:
+      rgblight_mode(15);
       break;
     default:
       break;
