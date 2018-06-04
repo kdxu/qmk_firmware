@@ -39,35 +39,21 @@ enum custom_keycodes {
 
 #define ALFRED LALT(KC_SPC)
 #define EISU_KANA LGUI(KC_SPC)
-
+#define GSLSH GUI_T(KC_SLSH)
+#define ALCLN ALT_T(KC_SCLN)
+#define GQUOT GUI_T(KC_QUOT)
+#define ARBRC ALT_T(KC_RBRC)
+#define GDQT GUI_T(KC_DQT)
+#define ARCBR ALT_T(KC_RCBR)
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
-
-
-void dance_cln_finished (qk_tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    register_code (KC_RSFT);
-    register_code (KC_SCLN);
-  } else {
-    register_code (KC_SCLN);
-  }
-}
-
-void dance_cln_reset (qk_tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    unregister_code (KC_RSFT);
-    unregister_code (KC_SCLN);
-  } else {
-    unregister_code (KC_SCLN);
-  }
-}
 
 enum {
   TD_ALF = 0,
   TD_LPLN = 1,
   TD_RPLN = 2,
   TD_SAKN = 3,
-  CT_CLN = 4
+  TD_DESC = 4
 };
 
 qk_tap_dance_action_t tap_dance_actions[] = {
@@ -75,7 +61,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_LPLN] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_LBRC),
   [TD_RPLN] = ACTION_TAP_DANCE_DOUBLE(KC_RPRN, KC_RBRC),
   [TD_SAKN] = ACTION_TAP_DANCE_DOUBLE(KC_SPC, EISU_KANA),
-  [CT_CLN] = ACTION_TAP_DANCE_FN_ADVANCED (NULL, dance_cln_finished, dance_cln_reset)
+  [TD_DESC] = ACTION_TAP_DANCE_DOUBLE(KC_DOT, KC_ESC)
 };
 
 
@@ -85,18 +71,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------.             ,-----------------------------------------.
    * |      |   Q  |   W  |   E  |   R  |   T  |             |   Y  |   U  |   I  |   O  |   P  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   A  |   S  |   D  |   F  |   G  |             |   H  |   J  |   K  |   L  |  Alt |      |
+   * |      |   A  |   S  |   D  |   F  |   G  |             |   H  |   J  |   K  |   L  |   ;  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   Z  |   X  |   C  |   V  |   B  |             |   N  |   M  |   ,  |   .  |  GUI |      |
+   * |      |   Z  |   X  |   C  |   V  |   B  |             |   N  |   M  |   ,  |   .  |   /  |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
    * |Adjust|      |      |      | Ctrl | Lower| Space| Bksp | Raise| Shift|      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_QWERTY] = KEYMAP( \
-      _______,  KC_Q,    KC_W,    KC_E,    KC_R,   KC_T,                 KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, _______, \
-      _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                 KC_H,    KC_J,    KC_K,    KC_L,    KC_LALT, _______, \
-      _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                 KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_LGUI, _______, \
-      ADJUST,  _______,  _______, _______, KC_LCTL, LOWER, KC_SPC, KC_BSPC, RAISE, KC_LSFT,  _______, _______, _______,  _______  \
+      _______,  KC_Q,    KC_W,    KC_E,    KC_R,   KC_T,                 KC_Y,    KC_U,    KC_I,    KC_O,          KC_P, _______, \
+      _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                 KC_H,    KC_J,    KC_K,    KC_L,          ALCLN, _______, \
+      _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                 KC_N,    KC_M,    KC_COMM, TD(TD_DESC),   GSLSH, _______, \
+      ADJUST,  _______,  _______, _______, KC_LCTL, LOWER, KC_SPC, KC_BSPC, RAISE, KC_LSFT,  _______, _______,     _______,  _______  \
       ),
 
 
@@ -106,15 +92,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |  Tab | Left | Down |  Up  | Right|             |   -  |   _  |   =  |   [  |   ]  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   `  |      |      |  Alt |      |             | GUI  |      |      |   \  |   '  |      |
+   * |      |   `  |      |      |      |      |             |      |      |      |   \  |   '  |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
    * |      |      |      |      |      |      |      |      |      | Shift|      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_RAISE] = KEYMAP( \
       _______,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
-      _______,  KC_TAB,  KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,                  KC_MINS, KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC, _______, \
-      _______,  KC_GRV, _______,  _______, KC_LALT, _______,                KC_LGUI, _______, _______, KC_BSLS,  KC_QUOT, _______,\
+      _______,  KC_TAB,  KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,                  KC_MINS, KC_UNDS, KC_EQL,  KC_LBRC, ARBRC, _______, \
+      _______,  KC_GRV, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,                _______, _______, _______, KC_BSLS,  GQUOT, _______,\
       _______, _______, _______, _______, _______, _______, EISU_KANA, _______, _______, KC_LSFT, _______, _______, _______, _______ \
       ),
 
@@ -125,15 +111,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |  Esc |      |      |      |      |             |   -  |   _  |   +  |   {  |  }   |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   ~  |      |      |      |      |             |  GUI |   ;  |   /  |   |  |   "  |      |
+   * |      |   ~  |      |      |      |      |             |      |   :  |   /  |   |  |   "  |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
    * |      |      |      |      |      |      |      | Enter|      |      |      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_LOWER] = KEYMAP( \
-      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                KC_CIRC, KC_AMPR, KC_ASTR, TD(TD_LPLN), TD(TD_RPLN), _______,\
-      _______, TD(TD_ALF), _______, _______, _______, _______,             KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, _______, \
-      _______, KC_TILD, _______, _______, _______, _______,                KC_LGUI, TD(CT_CLN), KC_SLSH, KC_PIPE,  KC_DQT, _______, \
+      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                  KC_CIRC, KC_AMPR, KC_ASTR, TD(TD_LPLN), TD(TD_RPLN), _______,\
+      _______, TD(TD_ALF), _______, _______, _______, _______,               KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, ARCBR, _______, \
+      _______, KC_TILD, _______, _______, _______, _______,                  _______, KC_COLN, KC_SLSH, KC_PIPE,  GDQT, _______, \
       _______, _______, _______, _______, _______, _______, _______, KC_ENT, _______, _______, _______, _______, _______, _______ \
       ),
 
