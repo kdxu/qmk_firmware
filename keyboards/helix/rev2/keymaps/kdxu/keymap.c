@@ -43,8 +43,6 @@ enum custom_keycodes {
 #define ALCLN ALT_T(KC_SCLN)
 #define GQUOT GUI_T(KC_QUOT)
 #define ARBRC ALT_T(KC_RBRC)
-#define GDQT GUI_T(KC_DQT)
-#define ARCBR ALT_T(KC_RCBR)
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 
@@ -118,8 +116,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_LOWER] = KEYMAP( \
       _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                  KC_CIRC, KC_AMPR, KC_ASTR, TD(TD_LPLN), TD(TD_RPLN), _______,\
-      _______, TD(TD_ALF), _______, _______, _______, _______,               KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, ARCBR, _______, \
-      _______, KC_TILD, _______, _______, _______, _______,                  _______, KC_COLN, KC_SLSH, KC_PIPE,  GDQT, _______, \
+      _______, TD(TD_ALF), _______, _______, _______, _______,               KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, _______, \
+      _______, KC_TILD, _______, _______, _______, _______,                  _______, KC_COLN, KC_SLSH, KC_PIPE,  KC_DQT, _______, \
       _______, _______, _______, _______, _______, _______, _______, KC_ENT, _______, _______, _______, _______, _______, _______ \
       ),
 
