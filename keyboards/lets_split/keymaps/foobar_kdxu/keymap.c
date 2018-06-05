@@ -119,9 +119,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* RAISE
    * ,----------------------------------,        ,----------------------------------.
-   * |  1   |  2   |   3  |  4   |  5   |        |   6  |   7  |   8  |   9  |   0  |
+   * |  3   |  2   |   3  |  4   |  5   |        |   6  |   7  |   8  |   9  |   0  |
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |  TAB | LEFT | DOWN |  UP  |RIGHT |        |      |      | eisu | kana | Enter|
+   * |  TAB | LEFT | DOWN |  UP  |RIGHT |        |      | Enter| eisu | kana | BKSP |
    * |------+------+------+------+------|        |------+------+------+------+------|
    * |      |      | Copy | Paste| SPC  |        |!raise|      |  SFT | Ctrl | GUI  |
    * `----------------------------------'        `----------------------------------'
@@ -129,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [RAISE] = LAYOUT( \
     KC_1,    KC_2,  KC_3,  KC_4,  KC_5,   XXXXX, XXXXX, KC_6,  KC_7, KC_8,  KC_9, KC_0, \
-    KC_TAB,  KLEFT, KDOWN, KUP,   KRIGHT, XXXXX, XXXXX, XXXXX, XXXXX, KC_LANG2, KC_LANG1, KC_ENT, \
+    KC_TAB,  KLEFT, KDOWN, KUP,   KRIGHT, XXXXX, XXXXX, XXXXX, KC_ENT, KC_LANG2, KC_LANG1, KC_BSPC, \
     XXXXX, XXXXX, COPY,  PASTE, KC_SPC, XXXXX, XXXXX, _____, XXXXX, KC_LSFT, KC_LCTL, KC_LGUI, \
     XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX,  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \
   ),
