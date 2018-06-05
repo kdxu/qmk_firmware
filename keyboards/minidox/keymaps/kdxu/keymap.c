@@ -12,6 +12,7 @@ extern keymap_config_t keymap_config;
 
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
+#define COMM SFT_T(KC_COMM)
 #define GSLSH GUI_T(KC_SLSH)
 #define ALCLN ALT_T(KC_SCLN)
 #define GQUOT GUI_T(KC_QUOT)
@@ -41,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------|           |------+------+------+------+------|
  * |   A  |   S  |   D  |   F  |   G  |           |   H  |   J  |   K  |   L  | Alt/;|
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |   Z  |   X  |   C  |   V  |   B  |           |   N  |   M  |   ,  |  .   | GUI//|
+ * |   Z  |   X  |   C  |   V  |   B  |           |   N  |   M  | ,/Sft|  .   | GUI//|
  * `----------------------------------'           `----------------------------------'
  *                  ,--------------------.    ,------,-------------.
  *                  | Ctrl | LOWER|      |    |      | RAISE| Shift|
@@ -52,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [QWERTY] = LAYOUT( \
   MI_Q,    KC_W,    KC_E,    KC_R,    V_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    \
   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,         KC_H,    KC_J,    KC_K,    KC_L,    ALCLN, \
-  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  GSLSH, \
+  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    COMM, DOT,  GSLSH, \
                     KC_LCTL, MO(LOWER), KC_SPC,      KC_BSPC, MO(RAISE), OSM(MOD_LSFT)   \
 ),
 
@@ -63,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------|           |------+------+------+------+------|
  * |  Tab | Left | Down |  Up  | Right|           |   -  |   _  |   =  |   [  |   ]  |
  * |------+------+------+------+------|           |------+------+------+------+------|
- * |      |      |      |      |      |           |      |      |      |   \  |   '  |
+ * | eisu | kana |      |      |      |           |      |      |      |   \  |   '  |
  * `----------------------------------'           `----------------------------------'
  *                  ,--------------------.    ,------,-------------.
  *                  |      | LOWER|      |    |      | RAISE|      |
@@ -74,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [RAISE] = LAYOUT( \
   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    \
   KC_TAB,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,      KC_MINS, KC_UNDS, KC_EQL,  KC_LBRC, ARBRC, \
-  _______,  _______, _______, _______, _______,      _______, _______, _______, KC_BSLS,  GQUOT, \
+  KC_LANG2, KC_LANG1, _______, _______, _______,      _______, _______, _______, KC_BSLS,  GQUOT, \
                     _______, _______, _______,      _______, _______, _______                 \
 ),
 
@@ -118,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [VIM] =  LAYOUT( \
   _______,  _______,  _______, _______, _______,      _______, _______, _______, _______, KC_ESC, \
   _______,  _______,  _______, _______, _______,      _______, _______, _______, _______, _______, \
-  RESET,   _______, _______, _______, _______,      _______, _______, _______, _______,  _______, \
+  _______,  _______, _______, _______, _______,      _______, _______, _______, _______,  _______, \
                      _______, _______, KC_COLN,      KC_ENT,  _______, _______                    \
   ),
 
@@ -138,8 +139,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                `------'    `------'
  */
 [MISC] =  LAYOUT( \
-  _______,  _______,  _______, _______, _______,      LGUI(LSFT(KC_T)), _______, _______, _______, _______, \
-  _______,  _______,  _______, _______, _______,      _______, _______, _______, _______, _______, \
+  _______,  _______,  _______, _______, _______,    LGUI(LSFT(KC_T)), _______, _______, _______, _______, \
+  _______,  _______,  _______, _______, _______,    _______, _______, _______, _______, _______, \
   RESET,   _______, _______, _______, _______,      _______, _______, _______, _______,  _______, \
                      _______, _______, _______,     LALT(KC_A),  _______, _______                    \
 )

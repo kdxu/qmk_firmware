@@ -105,14 +105,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------|        |------+------+------+------+------|
    * |  Esc |  .   |   '  |   `  |   =  |        |   -  |   _  |   +  |   {  |  }   |
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |   ~  |  ,   |  EK  |      |!lower|        |  SFT |   ;  |   /  |   |  |   "  |
+   * |   ~  |  ,   |      |      |!lower|        |  SPC |   ;  |   /  |   |  |   "  |
    * `----------------------------------'        `----------------------------------'
    */
 
 [LOWER] = LAYOUT( \
   KC_EXLM,    KC_AT,   KC_HASH, KC_DLR,  KC_PERC, XXXXX, XXXXX,  KC_CIRC, KC_AMPR, KC_ASTR, TLPN,    TRPN,\
   TALF,       KC_DOT, KC_QUOT, KC_GRV,  KC_EQL,  XXXXX, XXXXX,  KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
-  KC_TILD,    KC_COMM,  EK,   XXXXX,   _____, XXXXX, XXXXX,  KC_LSFT,  CLN, KC_SLSH, KC_PIPE,  KC_DQT, \
+  KC_TILD,    KC_COMM,  XXXXX,   XXXXX,   _____, XXXXX, XXXXX,  KC_SPC,  CLN, KC_SLSH, KC_PIPE,  KC_DQT, \
   XXXXX,      XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX,  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX  \
   ),
 
@@ -121,16 +121,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----------------------------------,        ,----------------------------------.
    * |  1   |  2   |   3  |  4   |  5   |        |   6  |   7  |   8  |   9  |   0  |
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |  TAB | LEFT | DOWN |  UP  |RIGHT |        |      |      |      |      | Enter|
+   * |  TAB | LEFT | DOWN |  UP  |RIGHT |        |      |      | eisu | kana | Enter|
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |  GUI |      | Copy | Paste| SPC  |        |!raise|      |      |      | Ctrl |
+   * |      |      | Copy | Paste| SPC  |        |!raise|      |  SFT | Ctrl | GUI  |
    * `----------------------------------'        `----------------------------------'
    */
 
 [RAISE] = LAYOUT( \
     KC_1,    KC_2,  KC_3,  KC_4,  KC_5,   XXXXX, XXXXX, KC_6,  KC_7, KC_8,  KC_9, KC_0, \
-    KC_TAB,  KLEFT, KDOWN, KUP,   KRIGHT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, KC_ENT, \
-    KC_LGUI,   XXXXX, COPY,  PASTE, KC_SPC, XXXXX, XXXXX, _____, XXXXX, XXXXX, XXXXX, KC_LCTL, \
+    KC_TAB,  KLEFT, KDOWN, KUP,   KRIGHT, XXXXX, XXXXX, XXXXX, XXXXX, KC_LANG2, KC_LANG1, KC_ENT, \
+    XXXXX, XXXXX, COPY,  PASTE, KC_SPC, XXXXX, XXXXX, _____, XXXXX, KC_LSFT, KC_LCTL, KC_LGUI, \
     XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX,  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \
   ),
 
