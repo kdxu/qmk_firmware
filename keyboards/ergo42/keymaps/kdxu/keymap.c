@@ -1,4 +1,4 @@
-#include QMK_KEYBOARD_H
+#include "ergo42.h"
 #include "keymap_jp.h"       // qmk_firmware-master/quantum/keymap_extras/keymap_jp.h 日本語キーボード設定用
 
 extern keymap_config_t keymap_config;
