@@ -35,11 +35,11 @@ enum {
 #define TLPN TD(TD_LPLN)
 #define CLN  TD(CT_CLN)
 #define TALF TD(TD_ALF)
-#define SF_CM SFT_T(KC_COMM)
+#define AL_CM ALT_T(KC_COMM)
 #define CM_SL GUI_T(KC_SLSH)
-#define ALBC ALT_T(KC_BSPC)
+#define SF_BC SFT_T(KC_BSPC)
 #define CT_DOT CTL_T(KC_DOT)
-#define C_SPC   CTL_T(KC_SPC)
+#define C_SPC  CTL_T(KC_SPC)
 #define COPY   LGUI(KC_C)
 #define PASTE  LGUI(KC_V)
 #define KLEFT  KC_LEFT
@@ -90,14 +90,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------|        |------+------+------+------+------+
    * |   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  | BKSP |
    * |------+------+------+------+------+        |------+------+------+------+------+
-   * |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  | ,/Sft| ./Ctl| //GUI|
+   * |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  | ,/Alt| ./Ctl| //GUI|
    * +------+------+------+------+------+        +------+------+------+------+------+
    */
 [QWERTY] = LAYOUT( \
-  KC_Q,    KC_W,    KC_E,    KC_R,    VI_T,   XXXXX, XXXXX,  M_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
-  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,  XXXXX, XXXXX,  KC_H,    KC_J,    KC_K,    KC_L,    ALBC, \
-  KC_Z,    KC_X,    KC_C,    KC_V,    LB,    XXXXX, XXXXX,  RN,      KC_M,    SF_CM,   CT_DOT,  CM_SL, \
-  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX, XXXXX,  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX   \
+  KC_Q,  KC_W,  KC_E,  KC_R,  VI_T,  XXXXX, XXXXX, M_Y,   KC_U,    KC_I,    KC_O,    KC_P, \
+  KC_A,  KC_S,  KC_D,  KC_F,  KC_G,  XXXXX, XXXXX, KC_H,  KC_J,    KC_K,    KC_L,    SF_BC, \
+  KC_Z,  KC_X,  KC_C,  KC_V,  LB,    XXXXX, XXXXX, RN,    KC_M,    AL_CM,   CT_DOT,  CM_SL, \
+  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,   XXXXX,   XXXXX,   XXXXX   \
   ),
 
    /* LOWER
