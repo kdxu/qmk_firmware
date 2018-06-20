@@ -97,39 +97,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-uint32_t layer_state_set_keymap (uint32_t state) {
-  return state;
-}
-
-void matrix_init_user(void) {
-#ifdef RGBLIGHT_ENABLE
-  rgblight_enable();
-  rgblight_setrgb_blue();
-#endif
-}
-
-uint32_t layer_state_set_user(uint32_t state) {
-  uint8_t layer = biton32(state);
-  #ifdef RGBLIGHT_ENABLE
-  switch (layer) {
-    case _RAISE:
-      rgblight_setrgb_pink();
-      break;
-    case _LOWER:
-      rgblight_setrgb_chartreuse();
-      break;
-    case _MISC:
-      rgblight_setrgb_red();
-      break;
-    default:
-      rgblight_setrgb_blue();
-      break;
-  }
-  #endif
-  return state;
-}
-
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (!process_record_dynamic_macro(keycode, record)) {
     return false;
