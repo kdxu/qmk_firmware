@@ -33,11 +33,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MASTER_LEFT
 // #define MASTER_RIGHT
 // #define EE_HANDS
+#define TAPPING_TERM 100
 
 #undef RGBLED_NUM
 #define RGBLED_NUM 12
-#define RGBLIGHT_TIMER
-#define RGBLIGHT_LIMIT_VAL 100
+#define RGBLIGHT_ANIMATIONS
+#define RGBLIGHT_SLEEP
+#define RGBLIGHT_LIMIT_VAL 150
 #define RGBLIGHT_HUE_STEP 10
 #define RGBLIGHT_SAT_STEP 10
 #define RGBLIGHT_VAL_STEP 10
