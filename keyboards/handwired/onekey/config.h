@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROWS 1
 #define MATRIX_COLS 1
 
-#define MATRIX_COL_PINS {  B0 }
+#define MATRIX_COL_PINS {  B1 }
 #define MATRIX_ROW_PINS {  D0 }
 #define UNUSED_PINS
 
