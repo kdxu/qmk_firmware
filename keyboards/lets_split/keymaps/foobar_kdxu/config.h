@@ -29,16 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define USE_I2C
 
 /* Select hand configuration */
-#define MASTER_LEFT
-#undef RGB_DI_PIN
-#define RGB_DI_PIN B6
+#define MASTER_RIGHT
 #define IGNORE_MOD_TAP_INTERRUPT
-#undef RGBLED_NUM
-#define RGBLED_NUM 8
-#define RGBLIGHT_TIMER
-#define RGBLIGHT_ANIMATIONS
-#define RGBLIGHT_LIMIT_VAL 200
-#define RGBLIGHT_HUE_STEP 10
-#define RGBLIGHT_SAT_STEP 10
-#define RGBLIGHT_VAL_STEP 10
 #endif
