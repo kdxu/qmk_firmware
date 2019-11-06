@@ -31,6 +31,7 @@ enum {
 #define ALF LALT(KC_SPC)
 #define GTAB LGUI(KC_TAB)
 #define EK  LGUI(KC_SPC)
+#define QUS SFT_T(KC_SLSH)
 #define TEKP TD(TD_EKP)
 #define TRPN TD(TD_RPLN)
 #define TLPN TD(TD_LPLN)
@@ -107,14 +108,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------|        |------+------+------+------+------|
    * |  Esc |  .   |   '  |   `  |   =  |        |   -  |   _  |   +  |   {  |  }   |
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |   ~  |  ,   |      |      | ent  |        |!raise|   :  |   /  |   |  |   "  |
+   * |   ~  |  ,   |  Sft |  EK  | ent  |        |!raise|   :  |   /  |   |  |   "  |
    * `----------------------------------'        `----------------------------------'
    */
 
 [RAISE] = LAYOUT( \
   KC_EXLM,    KC_AT,   KC_HASH, KC_DLR,  KC_PERC, XXXXX, XXXXX,  KC_CIRC, KC_AMPR, KC_ASTR, TLPN,    TRPN,\
-  TALF,       KC_DOT, KC_QUOT, KC_GRV,  KC_EQL,  XXXXX, XXXXX,  KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
-  KC_TILD,    KC_COMM,  XXXXX, KC_QUOT,  KC_ENT, XXXXX, XXXXX,  _____,  CLN, KC_SLSH, KC_PIPE,  KC_DQT, \
+  TALF,       KC_DOT,  KC_QUOT, KC_GRV,  KC_EQL,  XXXXX, XXXXX,  KC_MINS, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  KC_TILD,    KC_COMM, KC_LSFT, EK,      KC_ENT, XXXXX, XXXXX,  _____,  CLN, KC_SLSH, KC_PIPE,  KC_DQT, \
   XXXXX,      XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX, XXXXX,  XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX  \
   ),
 
@@ -123,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----------------------------------,        ,----------------------------------.
    * |  3   |  2   |   3  |  4   |  5   |        |   6  |   7  |   8  |   9  |   0  |
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |  TAB | LEFT | DOWN |  UP  |RIGHT |        | ALF  | GTAB |      |  UP  | BKSP |
+   * |  TAB | LEFT | DOWN |  UP  |RIGHT |        | ALF  | GTAB |  EK  |  UP  |  ?   |
    * |------+------+------+------+------|        |------+------+------+------+------|
    * |      |      | shift| Ctrl |!lower|        | spc  | gui  | LEFT | DOWN | RIGHT|
    * `----------------------------------'        `----------------------------------'
@@ -131,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [LOWER] = LAYOUT( \
     KC_1,    KC_2,  KC_3,  KC_4,  KC_5,   XXXXX, XXXXX, KC_6,  KC_7, KC_8,  KC_9, KC_0, \
-    KC_TAB,  KLEFT, KDOWN, KUP,   KRIGHT, XXXXX, XXXXX, ALF, GTAB, XXXXX, KUP, KC_BSPC, \
+    KC_TAB,  KLEFT, KDOWN, KUP,   KRIGHT, XXXXX, XXXXX, ALF, GTAB, EK, KUP, QUS, \
     XXXXX, XXXXX,   KC_LSFT,  KC_LCTL, _____, XXXXX, XXXXX, C_SPC, KC_LGUI, KLEFT, KDOWN, KRIGHT, \
     XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX,  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \
   ),
@@ -142,14 +143,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------|        |------+------+------+------+------|
    * |   !  |   s  | CtrB | CtrF |  g   |        |  h   |   j  |   k  |  l   | Shift|
    * |------+------+------+------+------|        |------+------+------+------+------|
-   * |      |      |      |  v   | Ent  |        |  ESC |   %  |   /  |  ;   |      |
+   * |      |      |      |  v   | Ent  |        |  ESC |   %  |   /  |  ;   |  GUI |
    * `----------------------------------'        `----------------------------------'
    */
 
 [VIM] = LAYOUT( \
     KC_Q,  KC_W, KC_E, LCTL(KC_R), _____, XXXXX, XXXXX,  KC_Y, KC_U, KC_PERC, KC_COLN, KC_P,\
     KC_EXLM, KC_S, LCTL(KC_B), LCTL(KC_F), KC_G, XXXXX, XXXXX, KC_H,  KC_J,  KC_K, KC_L, KC_LSFT, \
-    XXXXX, XXXXX,  XXXXX, KC_V, KC_ENT, XXXXX, XXXXX, KC_ESC, KC_PERC, KC_SLSH, KC_SCLN, XXXXX, \
+    XXXXX, XXXXX,  XXXXX, KC_V, KC_ENT, XXXXX, XXXXX, KC_ESC, KC_PERC, KC_SLSH, KC_SCLN, KC_LGUI, \
     XXXXX,   XXXXX, XXXXX, XXXXX, XXXXX,  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \
   ),
   /* MISC
