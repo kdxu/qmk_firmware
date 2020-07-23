@@ -60,14 +60,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define BACKLIGHT_LEVELS 3
 
 /* Uncomment below if use underglow */
-#define RGB_DI_PIN F4
-#ifdef RGB_DI_PIN
-#define RGBLIGHT_ANIMATIONS
-#define RGBLED_NUM 6 
-#define RGBLIGHT_HUE_STEP 8
-#define RGBLIGHT_SAT_STEP 8
-#define RGBLIGHT_VAL_STEP 8
-#endif
+//#define RGB_DI_PIN F4
+//#ifdef RGB_DI_PIN
+//#define RGBLIGHT_ANIMATIONS
+//#define RGBLED_NUM 6 
+//#define RGBLIGHT_HUE_STEP 8
+//#define RGBLIGHT_SAT_STEP 8
+//#define RGBLIGHT_VAL_STEP 8
+//#endif
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCING_DELAY 5
@@ -235,7 +235,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SOFT_SERIAL_PIN D0
 
 //#define EE_HANDS
-#define I2C_MASTER_LEFT
-//#define I2C_MASTER_RIGHT
+//#define I2C_MASTER_LEFT
+#//define I2C_MASTER_RIGHT
 
 #define DISABLE_JTAG
+
+#define TAPPING_FORCE_HOLD
+#define TAPPING_TERM 100
+
